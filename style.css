@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  background-image: url("zxc.jpg");
+  background-color: darkgrey;
+}
+.grid-container {
+  display: grid;
+}
+#start {
+  width: 100px;
+  height: 30px;
+  background: lightslategray;
+}
+h1 {
+  text-align: center;
+}
+.player {
+  display: flex;
+}
+.box {
+  background: lightsalmon;
+  min-width: 50px;
+  min-height: 50px;
+  border: 1px solid black;
+  margin: 2px;
+  padding: 20px;
+}
+button {
+  border-radius: 10%;
+}
+
+/* // */
+.BanHienThiBaiDanh {
+  background: lightsalmon;
+  display: flex;
+  margin: auto;
+  border: black 1px solid;
+}
+.BanHienThiDoiThu {
+  background: lightsalmon;
+  display: flex;
+  margin: auto;
+  border: black 1px solid;
+}
