@@ -1,10 +1,10 @@
 //CARD
 
 let arrCard = [
-  { id: "3BICH", name: '3-Bich', point: 1, type: 3 },
-  { id: "3CHUON", name: "3-chuồn", point: 2, type: 3 },
-  { id: "3RO", name: "3-rô", point: 3, type: 3 },
-  { id: "3CO", name: "3-cơ", point: 4, type: 3 },
+  { id: "3BICH", name: '', point: 1, type: 3 },
+  { id: "3CHUON", name: "3C", point: 2, type: 3 },
+  { id: "3RO", name: "3D", point: 3, type: 3 },
+  { id: "3CO", name: "3H", point: 4, type: 3 },
   { id: "4BICH", name: "4-bích", point: 5, type: 4 },
   { id: "4CHUON", name: "4-chuồn", point: 6, type: 4 },
   { id: "4RO", name: "4-rô", point: 7, type: 4 },
@@ -82,6 +82,10 @@ var BaiDoiThu = document.querySelector(".BanHienThiDoiThu");
 
 //main
 checkLuotDi(luotDi);
+
+
+
+
 //Random arrCard in Pleyers
 function shuffleArray(array) {
   let shuffleArray = [...array];
@@ -93,12 +97,15 @@ function shuffleArray(array) {
 }
 
 
-//chia bài
+//send card
 function chiaBai() {
   var newCard = shuffleArray(arrCard);
   player1 = newCard.slice(0, 3);
   player1.map((card) => {
     card.idPlayer = 1;
+    if(player1.length<=3){
+      card.idPlayer =2;
+    }
   });
   player2 = newCard.slice(3, 6);
   player2.map((card) => {
@@ -418,190 +425,5 @@ function loadElementToArrChonBai(idPlayer) {
     btn.setAttribute("name", arrChonBai[i].id);
     btn.innerHTML = arrChonBai[i].name;
     ChonBai.appendChild(btn);
-  }
-}
-//load ElenmentToArrBaiDoiThu
-//Danh Hop Le!
-function ElenmentToArrBaiDoiThu() {
-  //kiem tra hop deu kien
-  debugger;
-  //lần đầu
-  if (kiemTraLanDau == 1) {
-    //xoa arrBanDoiThu cũ
-    arrBaiDoiThu = [];
-    BaiDoiThu.innerHTML = "";
-    for (let i = 0; i < arrChonBai.length; i++) {
-      arrBaiDoiThu.push(arrChonBai[i]);
-      let btn = document.createElement("BUTTON");
-      btn.setAttribute("class", "box");
-      btn.setAttribute("id", arrChonBai[i].idPlayer);
-      btn.setAttribute("name", arrChonBai[i].id);
-      btn.innerHTML = arrChonBai[i].name;
-      BaiDoiThu.appendChild(btn);
-    }
-    arrChonBai = [];
-    loadElementToArrChonBai();
-    document.getElementById("Danh").style.display = "none";
-    checkWin();
-    setStyleCard();
-    checkBoLuot();
-    kiemTraLanDau = 0;
-  }
-
-  //sau lần đầu
-  else {
-    if (checkChonBaiHopLe() == true) {
-      //so sanh point
-      if (keuBaiDanh == 1) {
-        if (checkDoubleCard() == false) {
-          alert("KHÔNG HỢP LỆ! CHỌN LẠI");
-          for (let i = 0; i < 13; i++) {
-            danhLai(); // fix bug : phải xóa hết một lần
-          }
-        } else {
-          //xoa arrBanDoiThu cũ
-          arrBaiDoiThu = [];
-          BaiDoiThu.innerHTML = "";
-          for (let i = 0; i < arrChonBai.length; i++) {
-            arrBaiDoiThu.push(arrChonBai[i]);
-            let btn = document.createElement("BUTTON");
-            btn.setAttribute("class", "box");
-            btn.setAttribute("id", arrChonBai[i].idPlayer);
-            btn.setAttribute("name", arrChonBai[i].id);
-            btn.innerHTML = arrChonBai[i].name;
-            BaiDoiThu.appendChild(btn);
-          }
-          arrChonBai = [];
-          loadElementToArrChonBai();
-          document.getElementById("Danh").style.display = "none";
-          checkWin();
-          setStyleCard();
-          checkBoLuot();
-        }
-      } else if (keuBaiDanh == 2) {
-        //kiem tra 2card đôi phải cùng type nhau
-        if (checkDoubleCard() == false) {
-          alert("KHÔNG HỢP LỆ! CHỌN LẠI");
-          for (let i = 0; i < 13; i++) {
-            danhLai(); // fix bug : phải xóa hết một lần
-          }
-        } else {
-          //xoa arrBanDoiThu cũ
-          arrBaiDoiThu = [];
-          BaiDoiThu.innerHTML = "";
-          for (let i = 0; i < arrChonBai.length; i++) {
-            arrBaiDoiThu.push(arrChonBai[i]);
-            let btn = document.createElement("BUTTON");
-            btn.setAttribute("class", "box");
-            btn.setAttribute("id", arrChonBai[i].idPlayer);
-            btn.setAttribute("name", arrChonBai[i].id);
-            btn.innerHTML = arrChonBai[i].name;
-            BaiDoiThu.appendChild(btn);
-          }
-          arrChonBai = [];
-          loadElementToArrChonBai();
-          document.getElementById("Danh").style.display = "none";
-          checkWin();
-          setStyleCard();
-          checkBoLuot();
-        }
-      } else {
-        //xoa arrBanDoiThu cũ
-        arrBaiDoiThu = [];
-        BaiDoiThu.innerHTML = "";
-        for (let i = 0; i < arrChonBai.length; i++) {
-          arrBaiDoiThu.push(arrChonBai[i]);
-          let btn = document.createElement("BUTTON");
-          btn.setAttribute("class", "box");
-          btn.setAttribute("id", arrChonBai[i].idPlayer);
-          btn.setAttribute("name", arrChonBai[i].id);
-          btn.innerHTML = arrChonBai[i].name;
-          BaiDoiThu.appendChild(btn);
-        }
-        arrChonBai = [];
-        loadElementToArrChonBai();
-        document.getElementById("Danh").style.display = "none";
-        checkWin();
-        setStyleCard();
-        checkBoLuot();
-      }
-    } else {
-      alert("KHÔNG HỢP LỆ! CHỌN LẠI");
-      for (let i = 0; i < 13; i++) {
-        danhLai(); // fix bug : phải xóa hết một lần
-      }
-    }
-  }
-}
-
-//func kiem tra ban doi thu la loại kểu đánh gì
-function setStyleCard() {
-  debugger;
-  if (arrBaiDoiThu.length == 1) {
-    keuBaiDanh = 1;
-  }
-  if (arrBaiDoiThu.length == 2) {
-    keuBaiDanh = 2;
-  }
-  if (arrBaiDoiThu.length == 3) {
-    keuBaiDanh = 3;
-  }
-  if (arrBaiDoiThu.length == 4) {
-    keuBaiDanh = 4;
-  } else if (arrBaiDoiThu.length == 0) {
-    keuBaiDanh = 0;
-  }
-}
-//kiem tra chonBai HOP LE
-
-function checkChonBaiHopLe() {
-  debugger;
-  if (arrChonBai.length == keuBaiDanh) {
-    return true;
-  } else if (keuBaiDanh == 0) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-//kiem tra danh Doi
-function checkDoubleCard() {
-  let pointCardChonBai = arrChonBai[0].point + arrChonBai[1].point;
-  let pointCardBaiDoiThu = arrBaiDoiThu[0].point + arrBaiDoiThu[1].point;
-  if (
-    pointCardChonBai > pointCardBaiDoiThu &&
-    arrChonBai[0].type == arrChonBai[1].type
-  ) {
-    return true;
-  } else {
-    return false;
-  }
-}
-//kiem tra Sanh
-
-//kiem tra danh coc
-function checkOneCard() {
-  debugger;
-  if (arrBaiDoiThu.length > 0) {
-    if (arrChonBai[0].point > arrBaiDoiThu[0].point) {
-      return true;
-    } else {
-      return false;
-    }
-  } else return false;
-}
-function checkWin() {
-  if (player1.length <= 0) {
-    alert(" PLAYER-1 WINNER !");
-  }
-  if (player2 <= 0) {
-    alert(" PLAYER-2 WINNER !");
-  }
-  if (player3 <= 0) {
-    alert(" PLAYER-3 WINNER !");
-  }
-  if (player4 <= 0) {
-    alert(" PLAYER-4 WINNER !");
   }
 }
